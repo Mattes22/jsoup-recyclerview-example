@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
 
         initRecyclerView()
         startLoading()
+        fab_release.setOnClickListener {
+            startLoading()
+        }
     }
 
     private fun initRecyclerView() {
