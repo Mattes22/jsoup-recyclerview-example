@@ -1,5 +1,7 @@
 package io.github.mklkj.jsouprecyclerviewexample
 
+import android.content.Intent
+import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
+        with(releasesAdapter) {
+            onReleaseItemClick = { openUrlInBrowser(it) }
+        }
+
         with(recycler_releases) {
             layoutManager = LinearLayoutManager(context)
             adapter = releasesAdapter
@@ -28,8 +34,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startLoading() {
-        loadAsyncTask = LoadAsyncTask(this, releasesAdapter)
+        loadAsyncTask = ReleasesLoadAsyncTask(this, releasesAdapter)
             .execute("https://jsoup.org/news/")
+    }
+
+    private fun openUrlInBrowser(url: String) {
+        startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)))
     }
 
     override fun onDestroy() {

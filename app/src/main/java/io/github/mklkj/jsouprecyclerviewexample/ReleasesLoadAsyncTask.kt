@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.jsoup.Jsoup
 import java.lang.ref.WeakReference
 
-class LoadAsyncTask(activity: MainActivity, adapter: ReleasesAdapter) :
+class ReleasesLoadAsyncTask(activity: MainActivity, adapter: ReleasesAdapter) :
     AsyncTask<String, Void, List<ReleaseItem>>() {
 
     private val activity: WeakReference<MainActivity> = WeakReference(activity)
@@ -23,7 +23,7 @@ class LoadAsyncTask(activity: MainActivity, adapter: ReleasesAdapter) :
 
     override fun doInBackground(vararg params: String?): List<ReleaseItem> {
         return Jsoup.connect(params[0]).get().select(".toc ol a").map {
-            ReleaseItem(it.text(), it.attr("href"))
+            ReleaseItem(it.text(), it.attr("abs:href"))
         }
     }
 

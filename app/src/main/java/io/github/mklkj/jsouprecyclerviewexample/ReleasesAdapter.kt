@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class ReleasesAdapter : RecyclerView.Adapter<ReleasesAdapter.ViewHolder>() {
 
     var items: List<ReleaseItem> = emptyList()
+
+    var onReleaseItemClick: (url: String) -> Unit = {}
 
     override fun getItemCount() = items.size
 
@@ -24,9 +25,7 @@ class ReleasesAdapter : RecyclerView.Adapter<ReleasesAdapter.ViewHolder>() {
 
         with(holder.view.findViewById<TextView>(R.id.item_release)) {
             text = item.name
-            setOnClickListener {
-                Toast.makeText(context, item.url, Toast.LENGTH_SHORT).show()
-            }
+            setOnClickListener { onReleaseItemClick(item.url) }
         }
     }
 
