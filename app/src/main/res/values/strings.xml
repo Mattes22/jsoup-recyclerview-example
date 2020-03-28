@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Jsoup + RecyclerView example</string>
+    <string name="no_item_found">No item found</string>
 </resources>
