@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         with(recycler_releases) {
             layoutManager = LinearLayoutManager(context)
             adapter = releasesAdapter
+            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         }
     }
 
